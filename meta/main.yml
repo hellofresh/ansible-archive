@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: Adham Helal
+  description:
+  company: HelloFresh
+  min_ansible_version: 1.8
+
+dependencies: []
