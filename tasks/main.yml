@@ -1,0 +1,27 @@
+---
+
+ - name: Check soruce file/dir stat
+   stat: 
+     path="{{ archive_src | mandatory }}"
+   register: archive_src_st
+
+ - name: Fail if source doest not exist 
+   fail: 
+     msg="source file/dir '{{ archive_src }}' does not exist"
+   when: not archive_src_st.stat.exists
+
+ - name: Check dest dir stat
+   stat: 
+     path="{{ archive_dest | mandatory }}"
+   register: archive_dest_st
+
+ - name: Create dest dir if does not exists
+   stat: 
+     path="{{ archive_dest }}"
+   when: not archive_dest_st.stat.exists
+
+ - name: Tar the file
+   shell:
+    "tar {{ archive_exclude_option }} {{ archive_compress_option[archive_compress] }} {{ archive_default_options }} {{ archive_extra_options }} {{ archive_dest }}/{{ archive_name | mandatory }} {{ archive_src }}"
+   args:
+    creates: "{{ archive_dest }}/{{ archive_name }}"
