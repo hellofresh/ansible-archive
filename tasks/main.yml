@@ -22,6 +22,6 @@
 
  - name: Tar the file
    shell:
-    "tar {{ archive_exclude_option }} {{ archive_compress_option[archive_compress] }} {{ archive_default_options }} {{ archive_extra_options }} {{ archive_dest }}/{{ archive_name | mandatory }} {{ archive_src }}"
+    "tar {{ archive_exclude_option }} {{ archive_compress_option[archive_compress] }} {{ archive_default_options }} {{ archive_extra_options }} {{ archive_dest }}/{{ archive_name | mandatory }} -C {{ archive_src }} ."
    args:
     creates: "{{ archive_dest }}/{{ archive_name }}"
